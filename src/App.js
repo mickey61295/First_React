@@ -89,6 +89,12 @@ export default function App() {
   const [rating, setRating] = useState()
   const [summary, setSummary] = useState()
 
+function resetForm(){
+  for (let i of document.getElementsByClassName("add-movie-input")) {
+    i.value = "";
+  } 
+}
+
 
   return (
     
@@ -123,17 +129,13 @@ export default function App() {
           setName("")
           setPoster("")
           setRating("")
-          setSummary("")
-          for (let i of document.getElementsByClassName("add-movie-input")) {
-            i.value = "";
-          }          
+          setSummary("")     
+          resetForm()    
         }}
         variant="contained">Add Movie</Button>
         <Button
         onClick={() => {
-          for (let i of document.getElementsByClassName("add-movie-input")) {
-            i.value = "";
-          }
+          resetForm()
         }}
         color="error"
         variant="contained">Reset</Button>
@@ -142,6 +144,7 @@ export default function App() {
       <Fab 
       onClick={() => {
         setDisplayState(displayState === "none" ? "block" : "none");
+        resetForm()
       }}
       color="primary"
       aria-label="add">

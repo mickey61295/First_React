@@ -28,7 +28,7 @@ export function Profile(props) {
           {descToggle ? <ExpandMoreIcon /> : <ExpandLessIcon />}
         </IconButton>
         </h2>
-        <p style = {{color: rating <= 8 ? rating <=6.5? "Red":"Yellow" : "Green"}}className="movie-rating">⭐{rating}</p>
+        <p style = {{color: rating <= 8 ? rating <=6.5? "Red":"blue" : "Green"}}className="movie-rating">⭐{rating}</p>
         </div>
         
         <div className="movie-desc">
