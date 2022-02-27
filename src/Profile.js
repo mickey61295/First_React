@@ -3,8 +3,14 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import { useState } from "react";
 import { Counter } from "./Counter";
+import InfoIcon from '@mui/icons-material/Info';
+import { useNavigate, useParams } from "react-router-dom";
+
+
+
 export function Profile(props) {
-    const { name, img, rating, summary } = props;
+  const navigate = useNavigate();
+    const { name, img, rating, summary, id } = props;
     const [displayState, setDisplayState] = useState("none");
     const styles = {
       display: displayState,
@@ -27,7 +33,18 @@ export function Profile(props) {
           aria-label="like">
           {descToggle ? <ExpandMoreIcon /> : <ExpandLessIcon />}
         </IconButton>
+        <IconButton
+        onClick={() => {
+          // change url
+          navigate("/movies/" + id);
+        } }
+          className="bt-sz-lg"
+          color="primary"
+          aria-label="like">
+          <InfoIcon />
+        </IconButton>
         </h2>
+        
         <p style = {{color: rating <= 8 ? rating <=6.5? "Red":"blue" : "Green"}}className="movie-rating">⭐{rating}</p>
         </div>
         
@@ -39,3 +56,17 @@ export function Profile(props) {
     );
   }
 
+export function MovieDetails({movieList}) {
+  const { id } = useParams();
+  const movie = movieList[id];
+  return (
+    <div>
+      <h1>Movie Details {id}</h1>
+      <img src={movie.poster} alt={movie.name} />
+      <h1>{movie.name}</h1>
+      <h1>{movie.rating}</h1>
+      <h1>{movie.summary}</h1>
+      
+    </div>
+  )
+}
