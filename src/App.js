@@ -152,8 +152,7 @@ function resetForm(){
         </Fab>
         </div>
       </div>
-    <div className="pageContainer">    
-
+    <div className="pageContainer">
       {movieList.map((item) => (
         <Profile
           name={item.name}

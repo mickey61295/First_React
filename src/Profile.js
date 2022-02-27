@@ -1,13 +1,13 @@
-import { Badge, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import { useState } from "react";
 import { Counter } from "./Counter";
 export function Profile(props) {
     const { name, img, rating, summary } = props;
-    const [displayState, setDisplayState] = useState("visible");
+    const [displayState, setDisplayState] = useState("none");
     const styles = {
-      visibility: displayState,
+      display: displayState,
     };
     const [descToggle, setDescToggle] = useState(true);
     return (
@@ -19,7 +19,7 @@ export function Profile(props) {
         <h2 className="movie-name">{name}
         <IconButton
         onClick={() => {
-          setDisplayState(displayState === "visible" ? "hidden" : "visible");
+          setDisplayState(displayState === "none" ? "block" : "none");
           setDescToggle(!descToggle);
         } }
           className="bt-sz-lg"
