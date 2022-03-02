@@ -1,9 +1,10 @@
 
+
 .pageContainer{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-
+  padding: 10px;
 }
 .movie-specs {
   display: flex;
@@ -73,4 +74,8 @@
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+.movie-detail-container{
+  max-width: 800px;
 }

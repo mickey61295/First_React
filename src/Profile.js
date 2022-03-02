@@ -5,8 +5,8 @@ import { useState } from "react";
 import { Counter } from "./Counter";
 import InfoIcon from '@mui/icons-material/Info';
 import { useNavigate, useParams } from "react-router-dom";
-
-
+import Button from '@mui/material/Button';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 export function Profile(props) {
   const navigate = useNavigate();
@@ -58,15 +58,45 @@ export function Profile(props) {
 
 export function MovieDetails({movieList}) {
   const { id } = useParams();
-  const movie = movieList[id];
+  const {name,rating,summary,trailer} = movieList[id];
+  const navigate = useNavigate();
   return (
-    <div>
-      <h1>Movie Details {id}</h1>
-      <img src={movie.poster} alt={movie.name} />
-      <h1>{movie.name}</h1>
-      <h1>{movie.rating}</h1>
-      <h1>{movie.summary}</h1>
+
+    <div className="pageContainer">
+      <iframe 
+        width="100%"
+        height="570"
+        src={trailer}
+        title="YouTube video player"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen>
+      </iframe>
+      <div className="movie-detail-container">
       
+        <div className="movie-specs">
+
+      <h2 className="movie-name">{name}</h2>
+      
+      <p style = {{color: rating <= 8 ? rating <=6.5? "Red":"blue" : "Green"}}className="movie-rating">⭐{rating}</p>
+      </div>
+      
+      <div className="movie-desc">
+      <p className="movie-summary">{summary}</p>
+      <Button
+        onClick={
+          () => {
+            // change url
+            navigate(-1);
+            } 
+          }
+        color="primary"
+        variant="contained"
+        startIcon={<KeyboardBackspaceIcon />}>
+          Back
+      </Button>
+      </div>
+    </div>    
     </div>
   )
 }
