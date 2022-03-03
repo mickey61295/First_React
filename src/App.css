@@ -93,3 +93,25 @@
   left: 50%;
   transform: translateX(-50%);
 }
+
+.navBar ul{
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.navBar li{
+  padding: 10px;
+}
+
+.deletebutton{
+  /* move button to end of line */
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.Counter{
+  max-width: fit-content;
+  display: inline-block;
+}

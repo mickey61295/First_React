@@ -39,22 +39,27 @@ export function AddMovie({ movieList, setMovieList }) {
         />
         <Button
         onClick={() => {
-        navigate("/movies");
-          const newMovie = {
+        if (name && poster && rating && summary && trailer) {
+            navigate("/movies");
+            const newMovie = {
             name: name,
             poster: poster,
             rating: rating,
             summary: summary,
             trailer: trailer
-          };
-        setMovieList([...movieList, newMovie]);
-        setName("");
-        setPoster("");
-        setRating("");
-        setSummary("");
-        setTrailer("");
-        resetForm();
+            };
+            setMovieList([...movieList, newMovie]);
+            setName("");
+            setPoster("");
+            setRating("");
+            setSummary("");
+            setTrailer("");
+            resetForm();
+        }
+        else {
+            alert("Please fill out all fields");
         }}
+        }
         variant="contained"
         >Add Movie</Button>
         </div>

@@ -6,12 +6,13 @@ import { Counter } from "./Counter";
 import InfoIcon from '@mui/icons-material/Info';
 import { useNavigate, useParams } from "react-router-dom";
 import Button from '@mui/material/Button';
-import {NotFoundPage} from './App';
+import { NotFoundPage } from "./NotFoundPage";
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
-
-export function Profile(props) {
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+export function Profile({movieList, setMovieList, id}) {
   const navigate = useNavigate();
-    const { name, img, rating, summary, id } = props;
+    const { name, poster, rating, summary} = movieList[id];
     const [displayState, setDisplayState] = useState("none");
     const styles = {
       display: displayState,
@@ -20,7 +21,7 @@ export function Profile(props) {
     return (
       <div className="movie-container">
         
-          <img className="movie-poster" src={img} alt={name} />
+          <img className="movie-poster" src={poster} alt={name} />
           <div className="movie-specs">
 
         <h2 className="movie-name">{name}
@@ -52,6 +53,25 @@ export function Profile(props) {
         <div className="movie-desc">
         <p style={styles} className="movie-summary">{summary}</p>
         <Counter />
+        <Button
+        onClick={() => {
+          // Delete movie from list
+          setMovieList(movieList.filter((movie, index) => index !== id));
+        } }
+          className="bt-sz-lg deletebutton"
+          color="error"
+          aria-label="like">
+          <DeleteIcon />
+        </Button>
+        <Button
+        onClick={() => {
+          navigate("/movies/" + id + "/edit");
+        } }
+          className="bt-sz-lg deletebutton"
+          color="secondary"
+          aria-label="like">
+          <EditIcon />
+        </Button>
         </div>
       </div>
     );
