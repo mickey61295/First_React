@@ -4,10 +4,10 @@ import "./App.css";
 import {Profile} from "./Profile";
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
-import { NavLink, Route, Routes } from "react-router-dom";
+import { Navigate, NavLink, Route, Routes } from "react-router-dom";
 import { Colorbox } from './Colorbox';
 import {MovieDetails} from "./Profile";
-
+import { AddMovie } from './AddMovie';
 
 const INITIAL_MOVIE_LIST = [
   {
@@ -85,29 +85,52 @@ const INITIAL_MOVIE_LIST = [
 export default function App() {
   const [movieList, setMovieList] = useState(INITIAL_MOVIE_LIST);
   return (
-    <div className="navbar">
+    <div className='Yello'>
+      <div className="navbar">
       <ul>
         <li>
           <NavLink to="/">Home</NavLink>
         </li>
         <li>
-          <NavLink to="/Movies">Movies</NavLink>
+          <NavLink to="/movies">Movies</NavLink>
         </li>
         <li>
-          <NavLink to="/Color-game">Color Game</NavLink>
+          <NavLink to="/movies/add">Add Movie</NavLink>
+        </li>
+        <li>
+          <NavLink to="/color-game">Color Game</NavLink>
         </li>
       </ul>
+    </div>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Movies" element={<Movielist movieList={movieList} setMovieList={setMovieList}/>} />
-        <Route path="/Movies/:id" element={<MovieDetails movieList={movieList}/>} />
-        <Route path="/Color-game" element={<Colorbox />} />
-        <Route />
+        <Route path="/movies" element={<Movielist movieList={movieList} setMovieList={setMovieList}/>} />
+        <Route path="/movies/:id" element={<MovieDetails movieList={movieList}/>} />
+        <Route path="/color-game" element={<Colorbox />} />
+        <Route path="/404" element={<NotFoundPage />} />
+        <Route path="/movies/add" element={<AddMovie movieList={movieList} setMovieList={setMovieList}/>} />
+        <Route path="/films"
+          element={<Navigate to="/movies" />}
+        />
+        <Route
+          path="*"
+          element={<Navigate replace to="/404" />}
+        />
       </Routes>
+    
     </div>
   );
 }
 
+export function NotFoundPage() {
+  return (
+    <div className='ErrorPage'>
+      <img
+      width="100%"
+      src="https://freefrontend.com/assets/img/html-funny-404-pages/HTML-404-Page.gif" alt="error" />
+    </div>
+  );
+}
 
 function Movielist({movieList, setMovieList}) {
   const [displayState, setDisplayState] = useState("none");
@@ -118,6 +141,7 @@ function Movielist({movieList, setMovieList}) {
   const [poster, setPoster] = useState()
   const [rating, setRating] = useState()
   const [summary, setSummary] = useState()
+  const [trailer, setTrailer] = useState()
 
 function resetForm(){
   for (let i of document.getElementsByClassName("add-movie-input")) {
@@ -147,25 +171,33 @@ function resetForm(){
             onChange={(event) => setSummary(event.target.value)}
             placeholder="Enter a summary"
             />
+            <input className='add-movie-input'
+            onChange={(event) => setTrailer(event.target.value)}
+            placeholder="Enter a trailer url"
+            />
+
         <Button 
           onClick={() => {
             const newMovie = {
               name: name,
               poster: poster,
               rating: rating,
-              summary: summary
+              summary: summary,
+              trailer: trailer              
             };
           setMovieList([...movieList, newMovie]);
           setName("");
           setPoster("");
           setRating("");
-          setSummary("");     
-          resetForm();    
+          setSummary("");
+          setTrailer("");  
+          setDisplayState(displayState === "none" ? "block" : "none");
+          resetForm();
         }}
         variant="contained">Add Movie</Button>
         <Button
         onClick={() => {
-          resetForm()
+          resetForm();
         }}
         color="error"
         variant="contained">Reset</Button>

@@ -6,6 +6,7 @@ import { Counter } from "./Counter";
 import InfoIcon from '@mui/icons-material/Info';
 import { useNavigate, useParams } from "react-router-dom";
 import Button from '@mui/material/Button';
+import {NotFoundPage} from './App';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 export function Profile(props) {
@@ -58,8 +59,11 @@ export function Profile(props) {
 
 export function MovieDetails({movieList}) {
   const { id } = useParams();
-  const {name,rating,summary,trailer} = movieList[id];
   const navigate = useNavigate();
+  try {
+    const {name,rating,summary,trailer} = movieList[id];
+  
+  
   return (
 
     <div className="pageContainer">
@@ -99,4 +103,8 @@ export function MovieDetails({movieList}) {
     </div>    
     </div>
   )
+}
+catch(err) {
+  return <NotFoundPage />
+}
 }

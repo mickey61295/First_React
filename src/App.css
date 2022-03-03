@@ -79,3 +79,17 @@
 .movie-detail-container{
   max-width: 800px;
 }
+
+.AddMovie input{
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.AddMovie Button{
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
