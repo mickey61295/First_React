@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import { Navigate, NavLink, Route, Routes } from "react-router-dom";
+import { Navigate, NavLink, Route, Routes, useNavigate } from "react-router-dom";
 import { Colorbox } from './Colorbox';
 import {MovieDetails} from "./Movie";
 import { AddMovie } from './AddMovie';
@@ -10,6 +10,7 @@ import { Movielist } from './Movielist';
 import { EditMovieDetails } from "./EditMovieDetails";
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
+import Toolbar from '@mui/material/Toolbar';
 
 const INITIAL_MOVIE_LIST = [
   {
@@ -86,26 +87,19 @@ const INITIAL_MOVIE_LIST = [
 
 export default function App() {
   const [movieList, setMovieList] = useState(INITIAL_MOVIE_LIST);
+  const navigate = useNavigate();
   return (
     <div className='Yello'>
-      <div className="navBar">
+
       <AppBar position="static">
-      <ul>
-        <li>
-          <NavLink to="/"><Button color="inherit">Home</Button></NavLink>
-        </li>
-        <li>
-          <NavLink to="/movies"><Button color="inherit">Movies</Button></NavLink>
-        </li>
-        <li>
-          <NavLink to="/movies/add"><Button color="inherit">Add Movie</Button></NavLink>
-        </li>
-        <li>
-          <NavLink to="/color-game"><Button color="inherit">Color Game</Button></NavLink>
-        </li>
-      </ul>
+        <Toolbar>
+          <Button color="inherit" onClick={() => navigate("/")}>Home</Button>
+          <Button color="inherit"onClick={() => navigate("/movies")}>Movies</Button>
+          <Button color="inherit" onClick={() => navigate("/movies/add")}>Add Movie</Button>
+          <Button color="inherit" onClick={() => navigate("/color-game")}>Color Game</Button>
+        </Toolbar>
       </AppBar>
-    </div>
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/movies" element={<Movielist movieList={movieList} setMovieList={setMovieList}/>} />
