@@ -15,7 +15,7 @@ import { CardActions } from "@mui/material";
 export function Profile({movieList, setMovieList, id, deleteButton, editButton}) {
   const navigate = useNavigate();
     const { name, poster, rating, summary} = movieList[id];
-    const [displayState, setDisplayState] = useState("none");
+    const [displayState, setDisplayState] = useState("block");
     const styles = {
       display: displayState,
     };
@@ -56,7 +56,7 @@ export function Profile({movieList, setMovieList, id, deleteButton, editButton})
         
         <div className="movie-desc">
         <p style={styles} className="movie-summary">{summary}</p>
-        <CardActions>
+        <CardActions className="Actions">
         <Counter />
         {deleteButton}
         {editButton}

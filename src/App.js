@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import { Navigate, NavLink, Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { Colorbox } from './Colorbox';
 import {MovieDetails} from "./Movie";
 import { AddMovie } from './AddMovie';
