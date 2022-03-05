@@ -37,7 +37,6 @@ export function Profile({movieList, setMovieList, id}) {
         </IconButton>
         <IconButton
         onClick={() => {
-          // change url
           navigate("/movies/" + id);
         } }
           className="bt-sz-lg"
@@ -55,7 +54,6 @@ export function Profile({movieList, setMovieList, id}) {
         <Counter />
         <Button
         onClick={() => {
-          // Delete movie from list
           setMovieList(movieList.filter((movie, index) => index !== id));
         } }
           className="bt-sz-lg deletebutton"
