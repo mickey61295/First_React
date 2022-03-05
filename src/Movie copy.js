@@ -11,7 +11,8 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import { CardActions } from "@mui/material";
+// import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 export function Profile({movieList, setMovieList, id, deleteButton, editButton}) {
   const navigate = useNavigate();
     const { name, poster, rating, summary} = movieList[id];
@@ -21,13 +22,11 @@ export function Profile({movieList, setMovieList, id, deleteButton, editButton})
     };
     const [descToggle, setDescToggle] = useState(true);
     return (
-      <Card className="movie-container">
-        <CardMedia
-          className="movie-poster"
-          image={poster}
-          title={name}        
-        />
-          <CardContent className="movie-specs">
+      <div className="movie-container">
+        <Card>
+          
+          <img className="movie-poster" src={poster} alt={name} />
+          <div className="movie-specs">
 
         <h2 className="movie-name">{name}
         <IconButton
@@ -52,17 +51,16 @@ export function Profile({movieList, setMovieList, id, deleteButton, editButton})
         </h2>
         
         <p style = {{color: rating <= 8 ? rating <=6.5? "Red":"blue" : "Green"}}className="movie-rating">⭐{rating}</p>
-        </CardContent>
+        </div>
         
         <div className="movie-desc">
         <p style={styles} className="movie-summary">{summary}</p>
-        <CardActions>
         <Counter />
         {deleteButton}
         {editButton}
-        </CardActions>
         </div>
-      </Card>
+        </Card>
+      </div>
     );
   }
 

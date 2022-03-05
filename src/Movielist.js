@@ -96,6 +96,7 @@ export function Movielist({ movieList, setMovieList }) {
       </div>
       <div className="pageContainer">
         {movieList.map((item, index) => (
+          
           <Profile
             key={index}
             movieList = {movieList}
@@ -106,7 +107,7 @@ export function Movielist({ movieList, setMovieList }) {
                   onClick={() => {
                       setMovieList(movieList.filter((movie, id) => index !== id));
                     } }
-                  className="bt-sz-lg deletebutton"
+                  className="deletebutton"
                   color="error"
                   aria-label="like">
                   <DeleteIcon />
@@ -117,7 +118,7 @@ export function Movielist({ movieList, setMovieList }) {
                 onClick={() => {
                     navigate("/movies/" + index + "/edit");
                   } }
-                className="bt-sz-lg deletebutton"
+                className="deletebutton"
                 color="secondary"
                 aria-label="like">
                 <EditIcon />
