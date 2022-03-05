@@ -98,7 +98,7 @@
   list-style-type: none;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  padding-left: 4px;
 }
 
 .navBar li{
@@ -115,3 +115,4 @@
   max-width: fit-content;
   display: inline-block;
 }
+
