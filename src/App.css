@@ -14,7 +14,6 @@
 }
 
 .movie-container {
-  /* background-color: orange; */
   width: 340px;
 }
 
@@ -106,7 +105,6 @@
 }
 
 .deletebutton{
-  /* move button to end of line */
   position: relative;
   left: 50%;
   transform: translateX(-50%);
