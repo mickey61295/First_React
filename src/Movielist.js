@@ -1,8 +1,11 @@
 import Button from '@mui/material/Button';
 import { useState } from "react";
-import { Profile } from "./Profile";
+import { Profile } from "./Movie";
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { useNavigate } from "react-router-dom";
 
 
 export function Movielist({ movieList, setMovieList }) {
@@ -15,6 +18,7 @@ export function Movielist({ movieList, setMovieList }) {
   const [rating, setRating] = useState();
   const [summary, setSummary] = useState();
   const [trailer, setTrailer] = useState();
+  const navigate = useNavigate();
 
   function resetForm() {
     //   Will replace with virtual DOM
@@ -97,6 +101,28 @@ export function Movielist({ movieList, setMovieList }) {
             movieList = {movieList}
             setMovieList = {setMovieList}
             id={index}
+            deleteButton = {
+                <Button
+                  onClick={() => {
+                      setMovieList(movieList.filter((movie, id) => index !== id));
+                    } }
+                  className="bt-sz-lg deletebutton"
+                  color="error"
+                  aria-label="like">
+                  <DeleteIcon />
+                </Button>
+                }
+            editButton = {
+              <Button
+                onClick={() => {
+                    navigate("/movies/" + index + "/edit");
+                  } }
+                className="bt-sz-lg deletebutton"
+                color="secondary"
+                aria-label="like">
+                <EditIcon />
+              </Button>
+            }
             />
         ))}
 

@@ -8,9 +8,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import Button from '@mui/material/Button';
 import { NotFoundPage } from "./NotFoundPage";
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
-import DeleteIcon from '@mui/icons-material/Delete';
+// import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-export function Profile({movieList, setMovieList, id}) {
+export function Profile({movieList, setMovieList, id, deleteButton, editButton}) {
   const navigate = useNavigate();
     const { name, poster, rating, summary} = movieList[id];
     const [displayState, setDisplayState] = useState("none");
@@ -52,7 +52,7 @@ export function Profile({movieList, setMovieList, id}) {
         <div className="movie-desc">
         <p style={styles} className="movie-summary">{summary}</p>
         <Counter />
-        <Button
+        {/* <Button
         onClick={() => {
           setMovieList(movieList.filter((movie, index) => index !== id));
         } }
@@ -60,8 +60,9 @@ export function Profile({movieList, setMovieList, id}) {
           color="error"
           aria-label="like">
           <DeleteIcon />
-        </Button>
-        <Button
+        </Button> */}
+        {deleteButton}
+        {/* <Button
         onClick={() => {
           navigate("/movies/" + id + "/edit");
         } }
@@ -69,7 +70,8 @@ export function Profile({movieList, setMovieList, id}) {
           color="secondary"
           aria-label="like">
           <EditIcon />
-        </Button>
+        </Button> */}
+        {editButton}
         </div>
       </div>
     );

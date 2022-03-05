@@ -2,12 +2,14 @@ import { useState } from "react";
 import "./App.css";
 import { Navigate, NavLink, Route, Routes } from "react-router-dom";
 import { Colorbox } from './Colorbox';
-import {MovieDetails} from "./Profile";
+import {MovieDetails} from "./Movie";
 import { AddMovie } from './AddMovie';
 import {NotFoundPage} from "./NotFoundPage"
 import { Home } from './Home';
 import { Movielist } from './Movielist';
 import { EditMovieDetails } from "./EditMovieDetails";
+import AppBar from '@mui/material/AppBar';
+import Button from '@mui/material/Button';
 
 const INITIAL_MOVIE_LIST = [
   {
@@ -87,20 +89,22 @@ export default function App() {
   return (
     <div className='Yello'>
       <div className="navBar">
+      <AppBar position="static">
       <ul>
         <li>
-          <NavLink to="/">Home</NavLink>
+          <NavLink to="/"><Button color="inherit">Home</Button></NavLink>
         </li>
         <li>
-          <NavLink to="/movies">Movies</NavLink>
+          <NavLink to="/movies"><Button color="inherit">Movies</Button></NavLink>
         </li>
         <li>
-          <NavLink to="/movies/add">Add Movie</NavLink>
+          <NavLink to="/movies/add"><Button color="inherit">Add Movie</Button></NavLink>
         </li>
         <li>
-          <NavLink to="/color-game">Color Game</NavLink>
+          <NavLink to="/color-game"><Button color="inherit">Color Game</Button></NavLink>
         </li>
       </ul>
+      </AppBar>
     </div>
       <Routes>
         <Route path="/" element={<Home />} />

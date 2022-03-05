@@ -45,7 +45,11 @@ export function EditMovieDetails({ movieList, setMovieList}) {
                     summary: summary,
                     trailer: trailer
                     };
-                    setMovieList([...movieList.slice(0, id), newMovie, ...movieList.slice(id + 1)]);
+                    // Create a copylist with the new movie replacing the old one
+                    const copyList = [...movieList];
+                    copyList[id] = newMovie;
+                    setMovieList(copyList);
+                    console.log(copyList);
                     setName("");
                     setPoster("");
                     setRating("");
