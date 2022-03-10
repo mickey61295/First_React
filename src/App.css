@@ -33,6 +33,7 @@
 
 .movie-summary {
   margin-top: 0;
+  padding: 16px;
 
 }
 
@@ -121,4 +122,8 @@
 .navBar li a{
   text-decoration: none;
   color: white;
+}
+
+.display-mode{
+  margin-left: auto;
 }

@@ -11,6 +11,10 @@ import { EditMovieDetails } from "./EditMovieDetails";
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
 import Toolbar from '@mui/material/Toolbar';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import { IconButton } from "@mui/material";
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
 
 const INITIAL_MOVIE_LIST = [
   {
@@ -85,18 +89,34 @@ const INITIAL_MOVIE_LIST = [
   }
 ];
 
+
+
 export default function App() {
+  const [displayMode, setDisplayMode] = useState("light");
+  const darkTheme = createTheme({
+    palette: {
+      mode: displayMode,
+    },
+  });
   const [movieList, setMovieList] = useState(INITIAL_MOVIE_LIST);
   const navigate = useNavigate();
+  const styles = {backgroundColor: '#121212'};
+  const icon = displayMode === "light" ? <DarkModeIcon /> : <LightModeIcon />;
   return (
-    <div className='Yello'>
+    <ThemeProvider theme={darkTheme}>
+    <div className='Yello' style={displayMode === "light"?{}:styles}>
 
-      <AppBar position="static">
-        <Toolbar>
+      <AppBar className="tbar" position="sticky" >
+        <Toolbar >
           <Button color="inherit" onClick={() => navigate("/")}>Home</Button>
           <Button color="inherit"onClick={() => navigate("/movies")}>Movies</Button>
           <Button color="inherit" onClick={() => navigate("/movies/add")}>Add Movie</Button>
           <Button color="inherit" onClick={() => navigate("/color-game")}>Color Game</Button>
+          <div className="display-mode">
+          <Button color="inherit" onClick={
+            () => setDisplayMode(displayMode === "light" ? "dark" : "light")
+          }>{icon}</Button>
+          </div>
         </Toolbar>
       </AppBar>
 
@@ -118,5 +138,6 @@ export default function App() {
       </Routes>
     
     </div>
+    </ThemeProvider>
   );
 }
