@@ -15,9 +15,10 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import { IconButton } from "@mui/material";
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
-
+import Paper from '@mui/material/Paper';
 const INITIAL_MOVIE_LIST = [
   {
+    id: "100",
     name: "RRR",
     poster:
       "https://englishtribuneimages.blob.core.windows.net/gallary-content/2021/6/Desk/2021_6$largeimg_977224513.JPG",
@@ -27,6 +28,7 @@ const INITIAL_MOVIE_LIST = [
     trailer: "https://www.youtube.com/embed/f_vbAtFSEc0"
   },
   {
+    id: "101",
     name: "Iron man 2",
     poster:
       "https://m.media-amazon.com/images/M/MV5BMTM0MDgwNjMyMl5BMl5BanBnXkFtZTcwNTg3NzAzMw@@._V1_FMjpg_UX1000_.jpg",
@@ -36,6 +38,7 @@ const INITIAL_MOVIE_LIST = [
     trailer: "https://www.youtube.com/embed/wKtcmiifycU"
   },
   {
+    id: "102",
     name: "No Country for Old Men",
     poster:
       "https://upload.wikimedia.org/wikipedia/en/8/8b/No_Country_for_Old_Men_poster.jpg",
@@ -45,6 +48,7 @@ const INITIAL_MOVIE_LIST = [
     trailer: "https://www.youtube.com/embed/38A__WT3-o0"
   },
   {
+    id: "103",
     name: "Jai Bhim",
     poster:
       "https://m.media-amazon.com/images/M/MV5BY2Y5ZWMwZDgtZDQxYy00Mjk0LThhY2YtMmU1MTRmMjVhMjRiXkEyXkFqcGdeQXVyMTI1NDEyNTM5._V1_FMjpg_UX1000_.jpg",
@@ -54,6 +58,7 @@ const INITIAL_MOVIE_LIST = [
     trailer: "https://www.youtube.com/embed/nnXpbTFrqXA"
   },
   {
+    id: "104",
     name: "The Avengers",
     rating: 8,
     summary:
@@ -63,6 +68,7 @@ const INITIAL_MOVIE_LIST = [
     trailer: "https://www.youtube.com/embed/eOrNdBpGMv8"
   },
   {
+    id: "105",
     name: "Interstellar",
     poster: "https://m.media-amazon.com/images/I/A1JVqNMI7UL._SL1500_.jpg",
     rating: 8.6,
@@ -71,6 +77,7 @@ const INITIAL_MOVIE_LIST = [
     trailer: "https://www.youtube.com/embed/zSWdZVtXT7E"
   },
   {
+    id: "106",
     name: "Baahubali",
     poster: "https://flxt.tmsimg.com/assets/p11546593_p_v10_af.jpg",
     rating: 8,
@@ -79,6 +86,7 @@ const INITIAL_MOVIE_LIST = [
     trailer: "https://www.youtube.com/embed/sOEg_YZQsTI"
   },
   {
+    id:"107",
     name: "Ratatouille",
     poster:
       "https://resizing.flixster.com/gL_JpWcD7sNHNYSwI1ff069Yyug=/ems.ZW1zLXByZC1hc3NldHMvbW92aWVzLzc4ZmJhZjZiLTEzNWMtNDIwOC1hYzU1LTgwZjE3ZjQzNTdiNy5qcGc=",
@@ -92,6 +100,7 @@ const INITIAL_MOVIE_LIST = [
 
 
 export default function App() {
+  
   const [displayMode, setDisplayMode] = useState("light");
   const darkTheme = createTheme({
     palette: {
@@ -99,12 +108,19 @@ export default function App() {
     },
   });
   const [movieList, setMovieList] = useState(INITIAL_MOVIE_LIST);
+  // fetch("https://62245c133af069a0f9b4080b.mockapi.io/movies")
+  //   .then(response => response.json())
+  //   .then(data => {
+  //     setMovieList(data);
+  //   });
   const navigate = useNavigate();
-  const styles = {backgroundColor: '#121212'};
   const icon = displayMode === "light" ? <DarkModeIcon /> : <LightModeIcon />;
+  const iconText = displayMode === "light" ? "Dark Mode" : "Light Mode";
   return (
     <ThemeProvider theme={darkTheme}>
-    <div className='Yello' style={displayMode === "light"?{}:styles}>
+      <Paper
+      style={{borderRadius:0,minHeight: "100vh"}} elevation={4}>
+    <div className='Yello' >
 
       <AppBar className="tbar" position="sticky" >
         <Toolbar >
@@ -113,9 +129,11 @@ export default function App() {
           <Button color="inherit" onClick={() => navigate("/movies/add")}>Add Movie</Button>
           <Button color="inherit" onClick={() => navigate("/color-game")}>Color Game</Button>
           <div className="display-mode">
-          <Button color="inherit" onClick={
+          <Button color="inherit"
+            startIcon={icon}
+            onClick={
             () => setDisplayMode(displayMode === "light" ? "dark" : "light")
-          }>{icon}</Button>
+          }>{iconText}</Button>
           </div>
         </Toolbar>
       </AppBar>
@@ -138,6 +156,7 @@ export default function App() {
       </Routes>
     
     </div>
+    </Paper>
     </ThemeProvider>
   );
 }

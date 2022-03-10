@@ -57,7 +57,7 @@ export function Profile({movieList, setMovieList, id, deleteButton, editButton})
         <div className="movie-desc">
         <p style={styles} className="movie-summary">{summary}</p>
         <CardActions className="Actions">
-        <Counter />
+        <Counter key={name}/>
         {deleteButton}
         {editButton}
         </CardActions>

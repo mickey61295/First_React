@@ -98,7 +98,7 @@ export function Movielist({ movieList, setMovieList }) {
         {movieList.map((item, index) => (
           
           <Profile
-            key={index}
+            key={item.name}
             movieList = {movieList}
             setMovieList = {setMovieList}
             id={index}
@@ -109,7 +109,7 @@ export function Movielist({ movieList, setMovieList }) {
                     } }
                   className="deletebutton"
                   color="error"
-                  aria-label="like">
+                  aria-label="delete-button">
                   <DeleteIcon />
                 </Button>
                 }
@@ -120,7 +120,7 @@ export function Movielist({ movieList, setMovieList }) {
                   } }
                 className="deletebutton"
                 color="secondary"
-                aria-label="like">
+                aria-label="edit-button">
                 <EditIcon />
               </Button>
             }
