@@ -15,10 +15,6 @@ import { CardActions } from "@mui/material";
 export function Profile({movieList, setMovieList, id, deleteButton, editButton}) {
   const navigate = useNavigate();
     const { name, poster, rating, summary} = movieList[id];
-    const [displayState, setDisplayState] = useState("block");
-    const styles = {
-      display: displayState,
-    };
     const [descToggle, setDescToggle] = useState(true);
     return (
       <Card className="movie-container">
@@ -32,7 +28,6 @@ export function Profile({movieList, setMovieList, id, deleteButton, editButton})
         <h2 className="movie-name">{name}
         <IconButton
         onClick={() => {
-          setDisplayState(displayState === "none" ? "block" : "none");
           setDescToggle(!descToggle);
         } }
           className="bt-sz-lg"
@@ -55,7 +50,7 @@ export function Profile({movieList, setMovieList, id, deleteButton, editButton})
         </CardContent>
         
         <div className="movie-desc">
-        <p style={styles} className="movie-summary">{summary}</p>
+        {descToggle ? <p className="movie-summary">{summary}</p> : ""}
         <CardActions className="Actions">
         <Counter key={name}/>
         {deleteButton}
