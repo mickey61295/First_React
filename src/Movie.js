@@ -12,9 +12,12 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { CardActions } from "@mui/material";
-export function Profile({movieList, setMovieList, id, deleteButton, editButton}) {
+import { useEffect } from "react";
+import { API } from "./global";
+
+export function Profile({movieList, ind, id, deleteButton, editButton}) {
   const navigate = useNavigate();
-    const { name, poster, rating, summary} = movieList[id];
+    const { name, poster, rating, summary} = movieList[ind];
     const [descToggle, setDescToggle] = useState(true);
     return (
       <Card className="movie-container">
@@ -61,12 +64,19 @@ export function Profile({movieList, setMovieList, id, deleteButton, editButton})
     );
   }
 
-export function MovieDetails({movieList}) {
+export function MovieDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [movie, setMovie] = useState([]);
+    useEffect(() => {
+      fetch(`${API}/${id}`)
+      .then((response) => response.json())
+      .then((data) => setMovie(data))
+    }, [])
   try {
-    const {name,rating,summary,trailer} = movieList[id];
-  
+    // const {name,rating,summary,trailer} = movieList[id];
+    
+    const {name,rating,summary,trailer} = movie;
   
   return (
 

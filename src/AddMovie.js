@@ -1,8 +1,9 @@
 import { Button } from "@mui/material"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {API} from "./global";
 
-export function AddMovie({ movieList, setMovieList }) {
+export function AddMovie() {
     const [name, setName] = useState()
     const [poster, setPoster] = useState()
     const [rating, setRating] = useState()
@@ -40,7 +41,6 @@ export function AddMovie({ movieList, setMovieList }) {
         <Button
         onClick={() => {
         if (name && poster && rating && summary && trailer) {
-            navigate("/movies");
             const newMovie = {
             name: name,
             poster: poster,
@@ -48,13 +48,20 @@ export function AddMovie({ movieList, setMovieList }) {
             summary: summary,
             trailer: trailer
             };
-            setMovieList([...movieList, newMovie]);
+            fetch(`${API}`, {method: "POST",
+            body: JSON.stringify(newMovie),
+            headers: {
+            "Content-Type": "application/json"
+            }
+            }).then(data => data.json())
+            .then (() => navigate("/movies"))
             setName("");
             setPoster("");
             setRating("");
             setSummary("");
             setTrailer("");
             resetForm();
+            
         }
         else {
             alert("Please fill out all fields");

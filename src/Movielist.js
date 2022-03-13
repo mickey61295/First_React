@@ -6,9 +6,18 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import {API} from "./global";
 
 
-export function Movielist({ movieList, setMovieList }) {
+export function Movielist() {
+  const [movieList, setMovieList] = useState([]);
+  const getMovies = () => {
+    fetch(`${API}`)
+    .then((response) => response.json())
+    .then((data) => setMovieList(data))
+  }
+  useEffect(() => getMovies(), [])
   const [displayState, setDisplayState] = useState("none");
   const styles = {
     display: displayState,
@@ -98,14 +107,16 @@ export function Movielist({ movieList, setMovieList }) {
         {movieList.map((item, index) => (
           
           <Profile
-            key={item.name}
+            key={item.id}
             movieList = {movieList}
             setMovieList = {setMovieList}
-            id={index}
+            id={item.id}
+            ind={index}
             deleteButton = {
                 <Button
                   onClick={() => {
-                      setMovieList(movieList.filter((movie, id) => index !== id));
+                      fetch(`${API}/${item.id}`, {method: "DELETE"})
+                      .then(() => getMovies())
                     } }
                   className="deletebutton"
                   color="error"
@@ -116,7 +127,7 @@ export function Movielist({ movieList, setMovieList }) {
             editButton = {
               <Button
                 onClick={() => {
-                    navigate("/movies/" + index + "/edit");
+                    navigate("/movies/" + "edit/"+ item.id);
                   } }
                 className="deletebutton"
                 color="secondary"

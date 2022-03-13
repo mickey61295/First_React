@@ -1,15 +1,26 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@mui/material";
+import {API} from "./global";
 
-export function EditMovieDetails({ movieList, setMovieList}) {
+export function EditMovieDetails() {
     const navigate = useNavigate();
     const { id } = useParams();
-    const [name, setName] = useState(movieList[id].name);
-    const [poster, setPoster] = useState(movieList[id].poster);
-    const [rating, setRating] = useState(movieList[id].rating);
-    const [summary, setSummary] = useState(movieList[id].summary);
-    const [trailer, setTrailer] = useState(movieList[id].trailer);
+    const [movie, setMovie] = useState({});
+    const [name, setName] = useState("");
+    const [poster, setPoster] = useState("");
+    const [rating, setRating] = useState("");
+    const [summary, setSummary] = useState("");
+    const [trailer, setTrailer] = useState("");
+    useEffect(() => {
+        fetch(`${API}/${id}`)
+        .then(data => data.json())
+        .then(data => {setName(data.name)
+        setPoster(data.poster)
+        setRating(data.rating)
+        setSummary(data.summary)
+        setTrailer(data.trailer)})
+    }, []);
     return (
         <div className="AddMovie">
           <input className='add-movie-input'
@@ -37,7 +48,6 @@ export function EditMovieDetails({ movieList, setMovieList}) {
             variant="contained"
             onClick={() => {
                 if (name && poster && rating && summary && trailer) {
-                    navigate("/movies");
                     const newMovie = {
                     name: name,
                     poster: poster,
@@ -46,15 +56,22 @@ export function EditMovieDetails({ movieList, setMovieList}) {
                     trailer: trailer
                     };
                     // Create a copylist with the new movie replacing the old one
-                    const copyList = [...movieList];
-                    copyList[id] = newMovie;
-                    setMovieList(copyList);
-                    console.log(copyList);
+                    fetch(`${API}/${id}`, {
+                      method: "PUT",
+                      headers: {
+                        "Content-Type": "application/json"
+                      },
+                      body: JSON.stringify(newMovie)
+                    }).then(data => data.json())
+                    .then(()=>navigate("/movies"));
                     setName("");
                     setPoster("");
                     setRating("");
                     setSummary("");
                     setTrailer("");
+                }
+                else {
+                    alert("Please fill out all fields");
                 }
             }}
             >Done</Button>

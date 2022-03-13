@@ -100,19 +100,14 @@ import { useEffect } from "react";
 
 
 export default function App() {
-  
+  // const [movieList, setMovieList] = useState(INITIAL_MOVIE_LIST);
   const [displayMode, setDisplayMode] = useState("light");
   const darkTheme = createTheme({
     palette: {
       mode: displayMode,
     },
   });
-  const [movieList, setMovieList] = useState(null);
-  useEffect(() => {
-      fetch("https://62245c133af069a0f9b4080b.mockapi.io/movies")
-      .then(response => response.json())
-      .then(data => setMovieList(data))
-    }, [])
+
   const navigate = useNavigate();
   const icon = displayMode === "light" ? <DarkModeIcon /> : <LightModeIcon />;
   const iconText = displayMode === "light" ? "Dark Mode" : "Light Mode";
@@ -140,11 +135,11 @@ export default function App() {
 
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/movies" element={<Movielist movieList={movieList} setMovieList={setMovieList}/>} />
-            <Route path="/movies/:id" element={<MovieDetails movieList={movieList}/>} />
+            <Route path="/movies" element={<Movielist />} />
+            <Route path="/movies/:id" element={<MovieDetails />} />
             <Route path="/color-game" element={<Colorbox />} />
             <Route path="/404" element={<NotFoundPage />} />
-            <Route path="/movies/add" element={<AddMovie movieList={movieList} setMovieList={setMovieList}/>} />
+            <Route path="/movies/add" element={<AddMovie/>} />
             <Route path="/films"
               element={<Navigate to="/movies" />}
             />
@@ -152,7 +147,7 @@ export default function App() {
               path="*"
               element={<Navigate replace to="/404" />}
             />
-            <Route path="/movies/:id/edit" element={<EditMovieDetails movieList={movieList} setMovieList={setMovieList}/>} />
+            <Route path="/movies/edit/:id" element={<EditMovieDetails />} />
           </Routes>
         
         </div>
