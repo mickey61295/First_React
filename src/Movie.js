@@ -72,7 +72,7 @@ export function MovieDetails() {
       fetch(`${API}/${id}`)
       .then((response) => response.json())
       .then((data) => setMovie(data))
-    }, [])
+    }, [id])
   try {
     // const {name,rating,summary,trailer} = movieList[id];
     

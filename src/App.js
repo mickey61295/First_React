@@ -15,7 +15,7 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import {ThemeProvider, createTheme } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
-import { useEffect } from "react";
+
 // const INITIAL_MOVIE_LIST = [
 //   {
 //     id: "100",
@@ -101,7 +101,7 @@ import { useEffect } from "react";
 
 export default function App() {
   // const [movieList, setMovieList] = useState(INITIAL_MOVIE_LIST);
-  const [displayMode, setDisplayMode] = useState("light");
+  const [displayMode, setDisplayMode] = useState("dark");
   const darkTheme = createTheme({
     palette: {
       mode: displayMode,

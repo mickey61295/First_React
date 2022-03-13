@@ -6,7 +6,6 @@ import {API} from "./global";
 export function EditMovieDetails() {
     const navigate = useNavigate();
     const { id } = useParams();
-    const [movie, setMovie] = useState({});
     const [name, setName] = useState("");
     const [poster, setPoster] = useState("");
     const [rating, setRating] = useState("");
@@ -20,7 +19,7 @@ export function EditMovieDetails() {
         setRating(data.rating)
         setSummary(data.summary)
         setTrailer(data.trailer)})
-    }, []);
+    }, [id]);
     return (
         <div className="AddMovie">
           <input className='add-movie-input'

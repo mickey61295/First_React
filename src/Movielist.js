@@ -127,7 +127,7 @@ export function Movielist() {
             editButton = {
               <Button
                 onClick={() => {
-                    navigate("/movies/" + "edit/"+ item.id);
+                    navigate("/movies/edit/"+ item.id);
                   } }
                 className="deletebutton"
                 color="secondary"
