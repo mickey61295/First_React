@@ -108,10 +108,8 @@ export function Movielist() {
           
           <Profile
             key={item.id}
-            movieList = {movieList}
-            setMovieList = {setMovieList}
+            movie= {item}
             id={item.id}
-            ind={index}
             deleteButton = {
                 <Button
                   onClick={() => {

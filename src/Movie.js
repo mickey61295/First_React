@@ -15,9 +15,9 @@ import { CardActions } from "@mui/material";
 import { useEffect } from "react";
 import { API } from "./global";
 
-export function Profile({movieList, ind, id, deleteButton, editButton}) {
+export function Profile({movie, id, deleteButton, editButton}) {
   const navigate = useNavigate();
-    const { name, poster, rating, summary} = movieList[ind];
+    const { name, poster, rating, summary} = movie;
     const [descToggle, setDescToggle] = useState(true);
     return (
       <Card className="movie-container">
@@ -98,7 +98,7 @@ export function MovieDetails() {
       </div>
       
       <div className="movie-desc">
-      <p className="movie-summary">{summary}</p>
+      <p className="movie-details-summary">{summary}</p>
       <Button
         onClick={
           () => {

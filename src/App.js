@@ -15,6 +15,7 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import {ThemeProvider, createTheme } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
+import { BasicForm } from "./BasicForm";
 
 // const INITIAL_MOVIE_LIST = [
 //   {
@@ -140,6 +141,7 @@ export default function App() {
             <Route path="/color-game" element={<Colorbox />} />
             <Route path="/404" element={<NotFoundPage />} />
             <Route path="/movies/add" element={<AddMovie/>} />
+            <Route path="/basicForm" element={<BasicForm/>} />
             <Route path="/films"
               element={<Navigate to="/movies" />}
             />
@@ -155,3 +157,4 @@ export default function App() {
     </ThemeProvider>
   );
 }
+
