@@ -54,7 +54,6 @@ export function EditMovieDetails() {
                     summary: summary,
                     trailer: trailer
                     };
-                    // Create a copylist with the new movie replacing the old one
                     fetch(`${API}/${id}`, {
                       method: "PUT",
                       headers: {

@@ -55,9 +55,7 @@ export function Profile({movieList, ind, id, deleteButton, editButton}) {
         <div className="movie-desc">
         {descToggle ? <p className="movie-summary">{summary}</p> : ""}
         <CardActions className="Actions">
-        <Counter key={name}/>
-        {deleteButton}
-        {editButton}
+        <Counter key={name}/> {deleteButton} {editButton}
         </CardActions>
         </div>
       </Card>
