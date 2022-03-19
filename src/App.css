@@ -4,6 +4,13 @@
 	justify-content: space-evenly;
 	padding: 10px;
 }
+
+.movie-container:hover {
+	position: relative;
+	margin-top: -0.25rem;
+	margin-bottom: 20px;
+}
+
 .movie-specs {
 	display: flex;
 	align-items: center;
