@@ -101,6 +101,7 @@ export function AddMovie() {
 			/>
 			<span className="error">
 				{formik.touched.trailer && formik.errors.trailer}
+				<br />
 			</span>
 			<Button type="submit" variant="contained">
 				Add Movie

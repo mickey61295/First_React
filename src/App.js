@@ -1,21 +1,20 @@
-import { useState } from "react";
-import "./App.css";
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
-import { Colorbox } from './Colorbox';
-import {MovieDetails} from "./Movie";
-import { AddMovie } from './AddMovie';
-import {NotFoundPage} from "./NotFoundPage"
-import { Home } from './Home';
-import { Movielist } from './Movielist';
-import { EditMovieDetails } from "./EditMovieDetails";
-import AppBar from '@mui/material/AppBar';
-import Button from '@mui/material/Button';
-import Toolbar from '@mui/material/Toolbar';
-import LightModeIcon from '@mui/icons-material/LightMode';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
-import {ThemeProvider, createTheme } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
-import { BasicForm } from "./BasicForm";
+import { useState } from 'react'
+import './App.css'
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
+import { Colorbox } from './Colorbox'
+import { MovieDetails } from './Movie'
+import { AddMovie } from './AddMovie'
+import { NotFoundPage } from './NotFoundPage'
+import { Home } from './Home'
+import { Movielist } from './Movielist'
+import { EditMovieDetails } from './EditMovieDetails'
+import AppBar from '@mui/material/AppBar'
+import Button from '@mui/material/Button'
+import Toolbar from '@mui/material/Toolbar'
+import LightModeIcon from '@mui/icons-material/LightMode'
+import DarkModeIcon from '@mui/icons-material/DarkMode'
+import { ThemeProvider, createTheme } from '@mui/material/styles'
+import Paper from '@mui/material/Paper'
 
 // const INITIAL_MOVIE_LIST = [
 //   {
@@ -98,63 +97,63 @@ import { BasicForm } from "./BasicForm";
 //   }
 // ];
 
-
-
 export default function App() {
-  // const [movieList, setMovieList] = useState(INITIAL_MOVIE_LIST);
-  const [displayMode, setDisplayMode] = useState("dark");
-  const darkTheme = createTheme({
-    palette: {
-      mode: displayMode,
-    },
-  });
+	// const [movieList, setMovieList] = useState(INITIAL_MOVIE_LIST);
+	const [displayMode, setDisplayMode] = useState('dark')
+	const darkTheme = createTheme({
+		palette: {
+			mode: displayMode,
+		},
+	})
 
-  const navigate = useNavigate();
-  const icon = displayMode === "light" ? <DarkModeIcon /> : <LightModeIcon />;
-  const iconText = displayMode === "light" ? "Dark Mode" : "Light Mode";
-  return (
-    <ThemeProvider theme={darkTheme}>
-      <Paper
-        style={{borderRadius:0,minHeight: "100vh"}} elevation={4}>
-        <div className='Yello' >
+	const navigate = useNavigate()
+	const icon = displayMode === 'light' ? <DarkModeIcon /> : <LightModeIcon />
+	const iconText = displayMode === 'light' ? 'Dark Mode' : 'Light Mode'
+	return (
+		<ThemeProvider theme={darkTheme}>
+			<Paper style={{ borderRadius: 0, minHeight: '100vh' }} elevation={4}>
+				<div className="Yello">
+					<AppBar className="tbar" position="sticky">
+						<Toolbar>
+							<Button color="inherit" onClick={() => navigate('/')}>
+								Home
+							</Button>
+							<Button color="inherit" onClick={() => navigate('/movies')}>
+								Movies
+							</Button>
+							<Button color="inherit" onClick={() => navigate('/movies/add')}>
+								Add Movie
+							</Button>
+							<Button color="inherit" onClick={() => navigate('/color-game')}>
+								Color Game
+							</Button>
+							<div className="display-mode">
+								<Button
+									color="inherit"
+									startIcon={icon}
+									onClick={() =>
+										setDisplayMode(displayMode === 'light' ? 'dark' : 'light')
+									}
+								>
+									{iconText}
+								</Button>
+							</div>
+						</Toolbar>
+					</AppBar>
 
-          <AppBar className="tbar" position="sticky" >
-            <Toolbar >
-              <Button color="inherit" onClick={() => navigate("/")}>Home</Button>
-              <Button color="inherit"onClick={() => navigate("/movies")}>Movies</Button>
-              <Button color="inherit" onClick={() => navigate("/movies/add")}>Add Movie</Button>
-              <Button color="inherit" onClick={() => navigate("/color-game")}>Color Game</Button>
-              <div className="display-mode">
-              <Button color="inherit"
-                startIcon={icon}
-                onClick={
-                () => setDisplayMode(displayMode === "light" ? "dark" : "light")
-              }>{iconText}</Button>
-              </div>
-            </Toolbar>
-          </AppBar>
-
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/movies" element={<Movielist />} />
-            <Route path="/movies/:id" element={<MovieDetails />} />
-            <Route path="/color-game" element={<Colorbox />} />
-            <Route path="/404" element={<NotFoundPage />} />
-            <Route path="/movies/add" element={<AddMovie/>} />
-            <Route path="/basicForm" element={<BasicForm/>} />
-            <Route path="/films"
-              element={<Navigate to="/movies" />}
-            />
-            <Route
-              path="*"
-              element={<Navigate replace to="/404" />}
-            />
-            <Route path="/movies/edit/:id" element={<EditMovieDetails />} />
-          </Routes>
-        
-        </div>
-      </Paper>
-    </ThemeProvider>
-  );
+					<Routes>
+						<Route path="/" element={<Home />} />
+						<Route path="/movies" element={<Movielist />} />
+						<Route path="/movies/:id" element={<MovieDetails />} />
+						<Route path="/color-game" element={<Colorbox />} />
+						<Route path="/404" element={<NotFoundPage />} />
+						<Route path="/movies/add" element={<AddMovie />} />
+						<Route path="/films" element={<Navigate to="/movies" />} />
+						<Route path="*" element={<Navigate replace to="/404" />} />
+						<Route path="/movies/edit/:id" element={<EditMovieDetails />} />
+					</Routes>
+				</div>
+			</Paper>
+		</ThemeProvider>
+	)
 }
-
