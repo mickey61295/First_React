@@ -5,6 +5,10 @@ import * as yup from 'yup'
 import { useFormik } from 'formik'
 
 const movieValidationSchema = yup.object({
+	email: yup
+		.string()
+		.min(4, 'Atleast 4 characters')
+		.matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i),
 	name: yup.string().required('Name is required'),
 	poster: yup
 		.string()
@@ -27,6 +31,19 @@ const movieValidationSchema = yup.object({
 })
 
 export function AddMovie() {
+	const createMovie = (values) => {
+		const newMovie = values
+		fetch(`${API}`, {
+			method: 'POST',
+			body: JSON.stringify(newMovie),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+			.then((data) => data.json())
+			.then(() => formik.resetForm())
+			.then(() => navigate('/movies'))
+	}
 	const navigate = useNavigate()
 	const formik = useFormik({
 		initialValues: {
@@ -38,17 +55,7 @@ export function AddMovie() {
 		},
 		validationSchema: movieValidationSchema,
 		onSubmit: (values) => {
-			const newMovie = values
-			fetch(`${API}`, {
-				method: 'POST',
-				body: JSON.stringify(newMovie),
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			})
-				.then((data) => data.json())
-				.then(() => formik.resetForm())
-				.then(() => navigate('/movies'))
+			createMovie(values)
 		},
 	})
 
