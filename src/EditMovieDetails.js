@@ -4,6 +4,7 @@ import { Button } from '@mui/material'
 import { API } from './global'
 import * as yup from 'yup'
 import { useFormik } from 'formik'
+import { TextField } from '@mui/material'
 
 const movieValidationSchema = yup.object({
 	name: yup.string().required('Name is required'),
@@ -42,6 +43,17 @@ export function EditMovieDetails() {
 function EditMovieForm({ movie }) {
 	const id = movie.id
 	const navigate = useNavigate()
+	const editMovie = (values) => {
+		fetch(`${API}/${id}`, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(values),
+		})
+			.then((data) => data.json())
+			.then(() => navigate('/movies'))
+	}
 	const formik = useFormik({
 		initialValues: {
 			name: movie.name,
@@ -52,72 +64,84 @@ function EditMovieForm({ movie }) {
 		},
 		validationSchema: movieValidationSchema,
 		onSubmit: (values) => {
-			fetch(`${API}/${id}`, {
-				method: 'PUT',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(values),
-			})
-				.then((data) => data.json())
-				.then(() => navigate('/movies'))
+			editMovie(values)
 		},
 	})
 	return (
 		<form onSubmit={formik.handleSubmit} className="AddMovie">
-			<input
-				className="add-movie-input"
+			<TextField
+				fullWidth
+				label="name"
+				variant="standard"
 				name="name"
 				value={formik.values.name}
 				onChange={formik.handleChange}
 				onBlur={formik.handleBlur}
-				placeholder="Enter a movie name"
+				error={formik.touched.name && formik.errors.name}
+				helperText={
+					formik.touched.name && formik.errors.name ? formik.errors.name : ''
+				}
 			/>
-			<span className="error">{formik.touched.name && formik.errors.name}</span>
-			<input
-				className="add-movie-input"
+			<TextField
+				fullWidth
+				variant="standard"
 				name="poster"
+				label="poster"
 				value={formik.values.poster}
 				onChange={formik.handleChange}
 				onBlur={formik.handleBlur}
-				placeholder="Enter a poster url"
+				error={formik.touched.poster && formik.errors.poster}
+				helperText={
+					formik.touched.poster && formik.errors.poster
+						? formik.errors.poster
+						: ''
+				}
 			/>
-			<span className="error">
-				{formik.touched.poster && formik.errors.poster}
-			</span>
-			<input
-				className="add-movie-input"
+			<TextField
+				fullWidth
+				variant="standard"
 				name="rating"
+				label="rating"
 				value={formik.values.rating}
 				onChange={formik.handleChange}
 				onBlur={formik.handleBlur}
-				placeholder="Enter a rating"
+				error={formik.touched.rating && formik.errors.rating}
+				helperText={
+					formik.touched.rating && formik.errors.rating
+						? formik.errors.rating
+						: ''
+				}
 			/>
-			<span className="error">
-				{formik.touched.rating && formik.errors.rating}
-			</span>
-			<input
-				className="add-movie-input"
+			<TextField
+				fullWidth
+				variant="standard"
 				name="summary"
-				value={formik.values.summary}
+				label="summary"
 				onChange={formik.handleChange}
 				onBlur={formik.handleBlur}
-				placeholder="Enter a summary"
+				value={formik.values.summary}
+				error={formik.touched.summary && formik.errors.summary}
+				helperText={
+					formik.touched.summary && formik.errors.summary
+						? formik.errors.summary
+						: ''
+				}
 			/>
-			<span className="error">
-				{formik.touched.summary && formik.errors.summary}
-			</span>
-			<input
-				className="add-movie-input"
+			<TextField
+				fullWidth
+				variant="standard"
 				name="trailer"
+				label="trailer"
 				value={formik.values.trailer}
 				onChange={formik.handleChange}
 				onBlur={formik.handleBlur}
-				placeholder="Enter a trailer url"
+				error={formik.touched.trailer && formik.errors.trailer}
+				helperText={
+					formik.touched.trailer && formik.errors.trailer
+						? formik.errors.trailer
+						: ''
+				}
 			/>
-			<span className="error">
-				{formik.touched.trailer && formik.errors.trailer}
-			</span>
 			<Button type="submit" color="success" variant="contained">
 				Save
 			</Button>

@@ -5,12 +5,6 @@
 	padding: 10px;
 }
 
-.movie-container:hover {
-	position: relative;
-	margin-top: -0.25rem;
-	margin-bottom: 20px;
-}
-
 .movie-specs {
 	display: flex;
 	align-items: center;
@@ -53,13 +47,6 @@
 	width: 340px;
 }
 
-.addMovie {
-	position: fixed;
-	bottom: 10%;
-	right: 2%;
-	z-index: 1;
-}
-
 .add-movie-form {
 	position: relative;
 	bottom: 10%;
@@ -84,14 +71,6 @@
 
 .movie-detail-container {
 	max-width: 800px;
-}
-
-.AddMovie input {
-	width: 100%;
-	padding: 10px;
-	margin-bottom: 10px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
 }
 
 .AddMovie Button {

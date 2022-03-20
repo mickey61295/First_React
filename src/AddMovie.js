@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { API } from './global'
 import * as yup from 'yup'
 import { useFormik } from 'formik'
+import TextField from '@mui/material/TextField'
 
 const movieValidationSchema = yup.object({
 	email: yup
@@ -61,55 +62,79 @@ export function AddMovie() {
 
 	return (
 		<form onSubmit={formik.handleSubmit} className="AddMovie">
-			<input
-				className="add-movie-input"
+			<TextField
+				fullWidth
+				label="name"
+				variant="standard"
 				name="name"
 				onChange={formik.handleChange}
 				onBlur={formik.handleBlur}
-				placeholder="Enter a movie name"
+				error={formik.touched.name && formik.errors.name}
+				helperText={
+					formik.touched.name && formik.errors.name ? formik.errors.name : ''
+				}
 			/>
-			<span className="error">{formik.touched.name && formik.errors.name}</span>
-			<input
-				className="add-movie-input"
+
+			<TextField
+				fullWidth
+				variant="standard"
 				name="poster"
+				label="poster"
 				onChange={formik.handleChange}
 				onBlur={formik.handleBlur}
-				placeholder="Enter a poster url"
+				error={formik.touched.poster && formik.errors.poster}
+				helperText={
+					formik.touched.poster && formik.errors.poster
+						? formik.errors.poster
+						: ''
+				}
 			/>
-			<span className="error">
-				{formik.touched.poster && formik.errors.poster}
-			</span>
-			<input
-				className="add-movie-input"
+
+			<TextField
+				fullWidth
+				variant="standard"
 				name="rating"
+				label="rating"
 				onChange={formik.handleChange}
 				onBlur={formik.handleBlur}
-				placeholder="Enter a rating"
+				error={formik.touched.rating && formik.errors.rating}
+				helperText={
+					formik.touched.rating && formik.errors.rating
+						? formik.errors.rating
+						: ''
+				}
 			/>
-			<span className="error">
-				{formik.touched.rating && formik.errors.rating}
-			</span>
-			<input
-				className="add-movie-input"
+
+			<TextField
+				fullWidth
+				variant="standard"
 				name="summary"
+				label="summary"
 				onChange={formik.handleChange}
 				onBlur={formik.handleBlur}
-				placeholder="Enter a summary"
+				error={formik.touched.summary && formik.errors.summary}
+				helperText={
+					formik.touched.summary && formik.errors.summary
+						? formik.errors.summary
+						: ''
+				}
 			/>
-			<span className="error">
-				{formik.touched.summary && formik.errors.summary}
-			</span>
-			<input
-				className="add-movie-input"
+
+			<TextField
+				fullWidth
+				variant="standard"
 				name="trailer"
+				label="trailer"
 				onChange={formik.handleChange}
 				onBlur={formik.handleBlur}
-				placeholder="Enter a trailer url"
+				error={formik.touched.trailer && formik.errors.trailer}
+				helperText={
+					formik.touched.trailer && formik.errors.trailer
+						? formik.errors.trailer
+						: ''
+				}
 			/>
-			<span className="error">
-				{formik.touched.trailer && formik.errors.trailer}
-				<br />
-			</span>
+
 			<Button type="submit" variant="contained">
 				Add Movie
 			</Button>
