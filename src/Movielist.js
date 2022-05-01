@@ -15,6 +15,7 @@ export function Movielist() {
 			.then((data) => setMovieList(data))
 	}
 	useEffect(() => getMovies(), [])
+	movieList ? console.log(movieList) : console.log('Loading')
 
 	const navigate = useNavigate()
 
@@ -29,9 +30,9 @@ export function Movielist() {
 						deleteButton={
 							<Button
 								onClick={() => {
-									fetch(`${API}/${item.id}`, { method: 'DELETE' }).then(() =>
-										getMovies()
-									)
+									fetch(`${API}/${item.id}`, {
+										method: 'DELETE',
+									}).then(() => getMovies())
 								}}
 								className="deletebutton"
 								color="error"
