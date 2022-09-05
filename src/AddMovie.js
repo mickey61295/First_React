@@ -33,8 +33,7 @@ const movieValidationSchema = yup.object({
 
 export function AddMovie() {
 	const createMovie = (values) => {
-		const newMovie = [values]
-		console.log(JSON.stringify(newMovie))
+		const newMovie = values
 		fetch(`${API}`, {
 			method: 'POST',
 			body: JSON.stringify(newMovie),
